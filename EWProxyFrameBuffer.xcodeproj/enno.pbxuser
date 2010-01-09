@@ -1,0 +1,205 @@
+// !$*UTF8*$!
+{
+	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeArchitecturePreference = i386;
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 96614E0610E930720066624E /* EWProxyframeBufferApp */;
+		activeTarget = 96614E9C10E93A820066624E /* All */;
+		addToTargets = (
+		);
+		breakpoints = (
+		);
+		codeSenseManager = 96614C8D10E8FBC90066624E /* Code sense */;
+		executables = (
+			96614E0610E930720066624E /* EWProxyframeBufferApp */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					238,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					198,
+					60,
+					20,
+					48.16259765625,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 284720134;
+			PBXWorkspaceStateSaveDate = 284720134;
+		};
+		sourceControlManager = 96614C8C10E8FBC90066624E /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	1A224C3EFF42367911CA2CB7 /* EWProxyFrameBufferDriver.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {967, 689}}";
+			sepNavSelRange = "{1201, 0}";
+			sepNavVisRange = "{37, 2113}";
+			sepNavWindowFrame = "{{38, 74}, {1026, 778}}";
+		};
+	};
+	1A224C3FFF42367911CA2CB7 /* EWProxyFrameBufferDriver.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {967, 4056}}";
+			sepNavSelRange = "{9295, 0}";
+			sepNavVisRange = "{8499, 1989}";
+			sepNavWindowFrame = "{{38, 74}, {1026, 778}}";
+		};
+	};
+	32D94FC30562CBF700B6AF17 /* EWProxyFrameBuffer */ = {
+		activeExec = 0;
+	};
+	96614C8C10E8FBC90066624E /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	96614C8D10E8FBC90066624E /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	96614CBE10E919F30066624E /* EWProxyFrameBuffer.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {908, 819}}";
+			sepNavSelRange = "{1119, 0}";
+			sepNavVisRange = "{213, 2158}";
+			sepNavWindowFrame = "{{38, 85}, {893, 767}}";
+		};
+	};
+	96614CC110E91A270066624E /* EWProxyFrameBufferClient.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {834, 1417}}";
+			sepNavSelRange = "{1529, 16}";
+			sepNavVisRange = "{0, 1931}";
+			sepNavWindowFrame = "{{15, 106}, {893, 767}}";
+		};
+	};
+	96614CC210E91A270066624E /* EWProxyFrameBufferClient.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {834, 4862}}";
+			sepNavSelRange = "{3406, 0}";
+			sepNavVisRange = "{0, 1081}";
+			sepNavWindowFrame = "{{38, 85}, {893, 767}}";
+		};
+	};
+	96614CC310E91A270066624E /* EWProxyFrameBufferFBuffer.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1013, 923}}";
+			sepNavSelRange = "{570, 0}";
+			sepNavVisRange = "{302, 2269}";
+		};
+	};
+	96614CC410E91A270066624E /* EWProxyFrameBufferFBuffer.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1517, 7358}}";
+			sepNavSelRange = "{19624, 0}";
+			sepNavVisRange = "{18055, 1841}";
+			sepNavWindowFrame = "{{15, 106}, {893, 767}}";
+		};
+	};
+	96614D9F10E92D7D0066624E /* EWProxyFrameBuffer.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {894, 1573}}";
+			sepNavSelRange = "{3276, 28}";
+			sepNavVisRange = "{2158, 1612}";
+			sepNavWindowFrame = "{{40, 84}, {893, 767}}";
+		};
+	};
+	96614DA710E92DB70066624E /* EWProxyFrameBufferConnection */ = {
+		activeExec = 0;
+	};
+	96614DFB10E930360066624E /* UIMainDialog.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {834, 614}}";
+			sepNavSelRange = "{872, 0}";
+			sepNavVisRange = "{0, 904}";
+		};
+	};
+	96614DFC10E930360066624E /* UIMainDialog.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1195, 2106}}";
+			sepNavSelRange = "{4917, 0}";
+			sepNavVisRange = "{0, 1666}";
+			sepNavWindowFrame = "{{61, 64}, {893, 767}}";
+		};
+	};
+	96614E0410E930720066624E /* EWProxyframeBufferApp */ = {
+		activeExec = 0;
+		executables = (
+			96614E0610E930720066624E /* EWProxyframeBufferApp */,
+		);
+	};
+	96614E0610E930720066624E /* EWProxyframeBufferApp */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = EWProxyframeBufferApp;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	96614E9C10E93A820066624E /* All */ = {
+		activeExec = 0;
+	};
+}
