@@ -116,6 +116,9 @@
 		96614E1210E930D00066624E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		96614E1410E930D00066624E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		96614E2010E931040066624E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		966A60D410F880060054EA7B /* APPLE_LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = APPLE_LICENSE; sourceTree = "<group>"; };
+		966A60D510F880060054EA7B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		966A60D610F880060054EA7B /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +160,9 @@
 				96614CBD10E919D90066624E /* Framework */,
 				96614C9810E9040C0066624E /* Kext */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
+				966A60D410F880060054EA7B /* APPLE_LICENSE */,
+				966A60D510F880060054EA7B /* LICENSE */,
+				966A60D610F880060054EA7B /* README */,
 			);
 			name = EWProxyFrameBuffer;
 			sourceTree = "<group>";
