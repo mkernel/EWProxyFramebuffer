@@ -57,8 +57,8 @@ public:
 	virtual IOReturn setDisplayMode(IODisplayModeID displayMode, IOIndex depth);
     virtual IOItemCount getConnectionCount( void );
 	virtual IOReturn getAttributeForConnection(IOIndex connectIndex, IOSelect attribute, uintptr_t *value);
-	virtual IOReturn setAttributeForConnection(IOIndex connection, IOSelect attribute, UInt32 value);
-	IOReturn setAttribute( IOSelect attribute, UInt32 value );
+	virtual IOReturn setAttributeForConnection(IOIndex connection, IOSelect attribute, uintptr_t value);
+	IOReturn setAttribute( IOSelect attribute, uintptr_t value );
 	IOReturn getAttribute( IOSelect attribute, uintptr_t * value );
 
 	virtual IOReturn Connect(int mode);

@@ -131,7 +131,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getAttribute( IOSelect attri
 //         and before aquire the framebuffer has to tell that the screen is connected
 //         otherwise it is ignored (there was no screen during information gathering, so there will never be one...)
 //Power:   power our virtual hardware on or off
-IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setAttribute( IOSelect attribute, UInt32 value )
+IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setAttribute( IOSelect attribute, uintptr_t value )
 {
 	IOReturn ret=super::setAttribute(attribute, value);
 	union myvar
@@ -172,7 +172,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setAttribute( IOSelect attri
 //OS understands it. It simply means that whenever a real screen is (dis)connected, our virtual one is
 //reconnected. OS can handle it... 
 //TODO
-IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setAttributeForConnection(IOIndex connection, IOSelect attribute, UInt32 value)
+IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setAttributeForConnection(IOIndex connection, IOSelect attribute, uintptr_t value)
 {
 	if(attribute==kConnectionProbe)
 	{
@@ -240,7 +240,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getAttributeForConnection(IO
 //	if(attribute==kConnectionChanged)
 //	{
 //		if(value!=NULL)
-//			*value=1;
+//			*value=0;
 //		return kIOReturnSuccess;
 //	}
 	IOReturn ret= super::getAttributeForConnection(connectIndex, attribute, value);
@@ -361,6 +361,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::enableController()
 //	IOLog("IODeviceMemory: %x\n",(int)apertureMem);
 	//power management is explained (a bit) in EWProxyFrameBufferDriver
 	static IOPMPowerState myPowerStates[3];
+//    getProvider()->joinPMtree(this);
 	myPowerStates[0].version=1;
 	myPowerStates[0].capabilityFlags=0;
 	myPowerStates[0].outputPowerCharacter=0;
