@@ -52,7 +52,7 @@ public:
 	virtual const char * getPixelFormats();
 	virtual UInt64 getPixelFormatsForDisplayMode(IODisplayModeID displayMode, IOIndex depth);
 	virtual IOReturn getPixelInformation(IODisplayModeID displayMode, IOIndex depth, IOPixelAperture aperture, IOPixelInformation * pixelInfo);
-	virtual IOReturn getStartupDisplayMode(IODisplayModeID * displayMode, IOIndex * depth);
+	//virtual IOReturn getStartupDisplayMode(IODisplayModeID * displayMode, IOIndex * depth);
 	virtual IODeviceMemory * getVRAMRange();
 	virtual IOReturn setDisplayMode(IODisplayModeID displayMode, IOIndex depth);
     virtual IOItemCount getConnectionCount( void );
