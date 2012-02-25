@@ -198,7 +198,7 @@ IOReturn info_ennowelbers_proxyframebuffer_client::sGetModeCount(info_ennowelber
 
 IOReturn info_ennowelbers_proxyframebuffer_client::sGetModeInfo(info_ennowelbers_proxyframebuffer_client* target, void *reference, IOExternalMethodArguments *arguments)
 {
-	IOLog("Client static Get Mode Info!\n");
+	IOLog("EWProxyFrameBuffer: Client static Get Mode Info!\n");
 	IOReturn ret= target->GetModeInfo(arguments->scalarInput[0], (EWProxyFramebufferModeInfo*)arguments->structureOutput);
 	arguments->structureOutputSize=sizeof(EWProxyFramebufferModeInfo);
 	return ret;
@@ -275,7 +275,7 @@ IOReturn info_ennowelbers_proxyframebuffer_client::GetModeCount()
 
 IOReturn info_ennowelbers_proxyframebuffer_client::GetModeInfo(int mode,EWProxyFramebufferModeInfo *info)
 {
-	IOLog("client->GetModeInfo(%d)\n",mode);
+	IOLog("EWProxyFrameBuffer: client->GetModeInfo(%d)\n",mode);
 	return fProvider->getmodeInfo(mode, info);
 }
 IOReturn info_ennowelbers_proxyframebuffer_client::clientMemoryForType( UInt32 type, IOOptionBits * options, IOMemoryDescriptor ** memory )

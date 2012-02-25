@@ -70,15 +70,15 @@ bool info_ennowelbers_proxyframebuffer_driver::start(IOService *provider)
 		//you need to to this AFTER setting power configuration.
 		//at least that's what i recall
 		registerService();
-		IOLog("EWProxyframeBuffer start with maximum resolution %dx%d\n",getMaxWidth(),getMaxHeight());
+		IOLog("EWProxyFrameBuffer: start with maximum resolution %dx%d\n",getMaxWidth(),getMaxHeight());
 		if(shouldInitFB())
 		{
-			IOLog("Initializing Framebuffer. Unload from this point is impossible.\n");
+			IOLog("EWProxyFrameBuffer: Initializing Framebuffer. Unload from this point is impossible.\n");
 			initFB();
 		}
 		else
 		{
-			IOLog("Framebuffer initialization deactivated.\n");
+			IOLog("EWProxyFrameBuffer: Framebuffer initialization deactivated.\n");
 		}
 		//StartFramebuffer(640, 480);
 	}
@@ -134,7 +134,7 @@ void info_ennowelbers_proxyframebuffer_driver::initFB()
 		userclient->release();
 		
 		fbuffer->init(dict);
-		IOLog("fbuffer retain count: %d\n",fbuffer->getRetainCount());
+		IOLog("EWProxyFrameBuffer: fbuffer retain count: %d\n",fbuffer->getRetainCount());
 		dict->release();
 		//i forgot why i did this, maybe to ensure that
 		//iokit does not mess up with me... 

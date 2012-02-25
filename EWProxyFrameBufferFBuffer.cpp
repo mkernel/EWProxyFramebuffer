@@ -47,7 +47,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::Connect(int mode)
 		if(ret!=kIOReturnSuccess)
 			return kIOReturnBadArgument;
 		this->mode=mode;
-		IOLog("PSPDriver mode is now %d\n",mode);
+		IOLog("EWProxyFrameBuffer: mode is now %d\n",mode);
 		//helper variables for disconnect and in order to prepare mode switch without
 		//disconnecting (i think).
 		connected=true;
@@ -108,7 +108,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getAttribute( IOSelect attri
 	myvar var;
 	var.attribute=attribute;
 	var.param[4]='\0';
-	IOLog("getAttribute(%s).\n",var.param);
+	IOLog("EWProxyFrameBuffer: getAttribute(%s).\n",var.param);
 	IOReturn ret= super::getAttribute(attribute, value);
 	if(attribute==kIOHardwareCursorAttribute)
 	{
@@ -116,9 +116,9 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getAttribute( IOSelect attri
 		ret= kIOReturnSuccess;
 	}
 	if(value!=NULL)
-		IOLog("Value= %x, Ret=%x\n",(unsigned int)*value,ret);
+		IOLog("EWProxyFrameBuffer: Value= %x, Ret=%x\n",(unsigned int)*value,ret);
 	else
-		IOLog("Ret=%x\n",ret);
+		IOLog("EWProxyFrameBuffer: Ret=%x\n",ret);
 	return ret;
 	
 }
@@ -156,7 +156,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setAttribute( IOSelect attri
 		handleEvent((value>=1 ? kIOFBNotifyDidPowerOn : kIOFBNotifyDidPowerOff), NULL);
 		ret=kIOReturnSuccess;
 	}
-	IOLog("setAttribute(%s,%x)=%x\n",var.param,(unsigned int)value,ret);
+	IOLog("EWProxyFrameBuffer: setAttribute(%s,%x)=%x\n",var.param,(unsigned int)value,ret);
 	return ret;
 }
 
@@ -176,7 +176,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setAttributeForConnection(IO
 {
 	if(attribute==kConnectionProbe)
 	{
-		IOLog("Sense!\n");
+		IOLog("EWProxyFrameBuffer: Sense!\n");
 		connectChangeInterrupt(this,0);
 //		if(interrupts[1]!=NULL)
 //		{
@@ -197,7 +197,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setAttributeForConnection(IO
 	myvar var;
 	var.attribute=attribute;
 	var.param[4]='\0';
-	IOLog("setAttributeForConnection(%d,%s,%x)=%x\n",(int)connection,var.param,(unsigned int)value,(unsigned int)ret);
+	IOLog("EWProxyFrameBuffer: setAttributeForConnection(%d,%s,%x)=%x\n",(int)connection,var.param,(unsigned int)value,(unsigned int)ret);
 	return ret;
 	
 }
@@ -217,7 +217,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getAttributeForConnection(IO
 	myvar var;
 	var.attribute=attribute;
 	var.param[4]='\0';
-	IOLog("getAttributeForConnection(%d,%s).\n",(int)connectIndex,var.param);
+	IOLog("EWProxyFrameBuffer: getAttributeForConnection(%d,%s).\n",(int)connectIndex,var.param);
 	if(attribute==kConnectionEnable)
 	{
 		if(value!=NULL)
@@ -245,16 +245,16 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getAttributeForConnection(IO
 //	}
 	IOReturn ret= super::getAttributeForConnection(connectIndex, attribute, value);
 	if(value!=NULL)
-		IOLog("Value= %x, Ret=%x\n",(unsigned int)*value,ret);
+		IOLog("EWProxyFrameBuffer: Value= %x, Ret=%x\n",(unsigned int)*value,ret);
 	else
-		IOLog("Ret=%x\n",ret);
+		IOLog("EWProxyFrameBuffer: Ret=%x\n",ret);
 	return ret;
 }
 
 bool info_ennowelbers_proxyframebuffer_fbuffer::init(OSDictionary *dict)
 {
 	bool res = super::init(dict);
-	IOLog("FBINIT\n");
+	IOLog("EWProxyFrameBuffer: FBINIT\n");
 	return res;
 }
 
@@ -262,7 +262,7 @@ bool info_ennowelbers_proxyframebuffer_fbuffer::init(OSDictionary *dict)
 //so this function only exists to stop the compiler from warning. 
 void info_ennowelbers_proxyframebuffer_fbuffer::free(void)
 {
-	IOLog("Free\n");
+	IOLog("EWProxyFrameBuffer: Free\n");
 	super::free();
 }
 
@@ -278,7 +278,7 @@ bool info_ennowelbers_proxyframebuffer_fbuffer::start(IOService *provider)
 	{
 		//fProvider->joinPMtree(this);
 	}
-	IOLog("Starting\n");
+	IOLog("EWProxyFrameBuffer: Starting\n");
 	if(fProvider==NULL)
 		return false;
 	return res;
@@ -295,13 +295,13 @@ void info_ennowelbers_proxyframebuffer_fbuffer::stop(IOService *provider)
 		graphicMem->release();
 		graphicMem=NULL;
 	}
-	IOLog("Stopping\n");
+	IOLog("EWProxyFrameBuffer: Stopping\n");
 }
 
 //provides OS with the memory range dependend on our current resolution
 IODeviceMemory * info_ennowelbers_proxyframebuffer_fbuffer::getApertureRange(IOPixelAperture aperture)
 {
-	IOLog("getApertureRange\n");
+	IOLog("EWProxyFrameBuffer: getApertureRange\n");
 	EWProxyFramebufferModeInfo info;
 	fProvider->getmodeInfo(mode, &info);
 	IODeviceMemory *dev=IODeviceMemory::withSubRange((IODeviceMemory*)graphicMem,0,(info.height*(info.width*4+32)+128));
@@ -313,7 +313,7 @@ IODeviceMemory * info_ennowelbers_proxyframebuffer_fbuffer::getApertureRange(IOP
 //and... it releases it, so we're overretaining here
 IODeviceMemory * info_ennowelbers_proxyframebuffer_fbuffer::getVRAMRange()
 {
-	IOLog("getVRAMRange\n");
+	IOLog("EWProxyFrameBuffer: getVRAMRange\n");
 	graphicMem->retain();
 	return (IODeviceMemory*)graphicMem;
 }
@@ -332,10 +332,13 @@ IODeviceMemory * info_ennowelbers_proxyframebuffer_fbuffer::getVRAMRange()
 //          and forbidden to go to higher resolutions than that.
 IOReturn info_ennowelbers_proxyframebuffer_fbuffer::enableController()
 {
-	IOLog("enableController\n");
+	IOLog("EWProxyFrameBuffer: enableController\n");
 	//I have no idea why we need 32 extra bytes per row and 128 bytes extra, but...
 	//it only works with these extra buffers
-	graphicSize=fProvider->getMaxHeight()*(fProvider->getMaxWidth()*4+32)+128;//width*height*4 buffer size, enough space for 4 buffers
+	//Size adaption: to increase memory, I provide 1k per line and 1 meg at the end
+	//this is for ansgar!
+	//graphicSize=fProvider->getMaxHeight()*(fProvider->getMaxWidth()*4+32)+128;//width*height*4 buffer size, enough space for 4 buffers
+	graphicSize=fProvider->getMaxHeight()*(fProvider->getMaxWidth()*4+1024)+10490880;//width*height*4 buffer size, enough space for 4 buffers
 	while( graphicSize % PAGE_SIZE != 0)
 	{
 		graphicSize++;
@@ -350,10 +353,10 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::enableController()
 	cursorMem=IOBufferMemoryDescriptor::withCapacity((320*4+32)*320+128, kIODirectionInOut);//cursor buffer, 320x320 px cursor size maximum;
 	cursorMapping=cursorMem->map(kIOMapAnywhere);
 	cursorBuf=(UInt8*)cursorMapping->getVirtualAddress();
-	IOLog("controller memory: size=%d bytes\n",graphicSize);
+	IOLog("EWProxyFrameBuffer: controller memory: size=%d bytes\n",graphicSize);
 	if(graphicMem==NULL)
 	{
-		IOLog("unable to reserve memory!\n");
+		IOLog("EWProxyFrameBuffer: unable to reserve memory!\n");
 	}
 //	IOLog("IODeviceMemory: %x\n",(int)apertureMem);
 	//power management is explained (a bit) in EWProxyFrameBufferDriver
@@ -384,14 +387,14 @@ IOItemCount info_ennowelbers_proxyframebuffer_fbuffer::getConnectionCount()
 	/*if(connected==0)result=0;
 	else
 		result=1;*/
-	IOLog("GetConnectionCount()=1\n");
+	IOLog("EWProxyFrameBuffer: GetConnectionCount()=1\n");
 	return 1;
 }
 
 //This Function is used by OS to get current Display Mode
 IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getCurrentDisplayMode(IODisplayModeID * displayMode, IOIndex * depth)
 {
-	IOLog("getCurrentDisplayMode\n");
+	IOLog("EWProxyFrameBuffer: getCurrentDisplayMode\n");
 	if(displayMode==NULL)
 		return kIOReturnBadArgument;
 	if(depth==NULL)
@@ -404,7 +407,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getCurrentDisplayMode(IODisp
 //OS wants to fill lists and needs the total amount of possible modes
 IOItemCount info_ennowelbers_proxyframebuffer_fbuffer::getDisplayModeCount()
 {
-	IOLog("getDisplayModeCount\n");
+	IOLog("EWProxyFrameBuffer: getDisplayModeCount\n");
 	return fProvider->getModeCount();
 }
 
@@ -414,7 +417,7 @@ IOItemCount info_ennowelbers_proxyframebuffer_fbuffer::getDisplayModeCount()
 //all the other information are transported using getInformationForDisplayMode
 IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getDisplayModes(IODisplayModeID * allDisplayModes)
 {
-	IOLog("getDisplayModes\n");
+	IOLog("EWProxyFrameBuffer: getDisplayModes\n");
 	for(int i=1;i<=fProvider->getModeCount();i++)
 	{
 		allDisplayModes[i-1]=i;
@@ -427,7 +430,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getDisplayModes(IODisplayMod
 //an extension would be (to prevent OS from switching) to make them visible based on the current mode setting
 IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getInformationForDisplayMode(IODisplayModeID displayMode, IODisplayModeInformation *info)
 {
-	IOLog("getInformationForDisplayMode\n");
+	IOLog("EWProxyFrameBuffer: getInformationForDisplayMode\n");
 	EWProxyFramebufferModeInfo pinfo;
 	IOReturn ret=fProvider->getmodeInfo(displayMode, &pinfo);
 	if(ret!=kIOReturnSuccess)
@@ -447,7 +450,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getInformationForDisplayMode
 //After asking us for a name OS asks for details with getPixelInformation.
 const char * info_ennowelbers_proxyframebuffer_fbuffer::getPixelFormats()
 {
-	IOLog("getPixelFormats\n");
+	IOLog("EWProxyFrameBuffer: getPixelFormats\n");
 	static const char * fmts=IO32BitDirectPixels "\0\0";
 	return fmts;
 }
@@ -455,7 +458,7 @@ const char * info_ennowelbers_proxyframebuffer_fbuffer::getPixelFormats()
 //this function is deprecated from what i recall
 UInt64 info_ennowelbers_proxyframebuffer_fbuffer::getPixelFormatsForDisplayMode(IODisplayModeID displayMode, IOIndex depth)
 {
-	IOLog("getPixelFormatsForDisplayMode\n");
+	IOLog("EWProxyFrameBuffer: getPixelFormatsForDisplayMode\n");
 	return 0;
 }
 
@@ -465,10 +468,10 @@ UInt64 info_ennowelbers_proxyframebuffer_fbuffer::getPixelFormatsForDisplayMode(
 //this is the simplest copy routine.
 IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getPixelInformation(IODisplayModeID displayMode, IOIndex depth, IOPixelAperture aperture, IOPixelInformation * pixelInfo)
 {
-	IOLog("getPixelInformation(mode=%x, depth=%x, aperture=%x)\n",(int)displayMode,(int)depth,(int)aperture);
+	IOLog("EWProxyFrameBuffer: getPixelInformation(mode=%x, depth=%x, aperture=%x)\n",(int)displayMode,(int)depth,(int)aperture);
 	if(depth!=0)
 	{
-		IOLog("Unsupported!\n");
+		IOLog("EWProxyFrameBuffer: Unsupported!\n");
 		return kIOReturnUnsupportedMode;
 	}
 	else
@@ -478,7 +481,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getPixelInformation(IODispla
 		if(ret!=kIOReturnSuccess)
 			return ret;
 		bzero(pixelInfo,sizeof(*pixelInfo));
-		IOLog("returning for %d x %d\n",pinfo.width,pinfo.height);
+		IOLog("EWProxyFrameBuffer: returning for %d x %d\n",pinfo.width,pinfo.height);
 		pixelInfo->bytesPerRow=pinfo.width*4+32;//32 byte row header??
 		pixelInfo->bitsPerPixel=32;
 		pixelInfo->pixelType=kIORGBDirectPixels;
@@ -490,7 +493,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getPixelInformation(IODispla
 		pixelInfo->componentMasks[0]=0x00FF0000;
 		pixelInfo->componentMasks[1]=0x0000FF00;
 		pixelInfo->componentMasks[2]=0x000000FF;
-		IOLog("Pixel Data: bytesPerRow=%d bytesPerPlane=%d bitsPerPixel=%d pixelType=%d components=%d bitsPerComponent=%d pixelformat=%s width=%d height=%d masks(%x,%x,%x)\n",
+		IOLog("EWProxyFrameBuffer: Pixel Data: bytesPerRow=%d bytesPerPlane=%d bitsPerPixel=%d pixelType=%d components=%d bitsPerComponent=%d pixelformat=%s width=%d height=%d masks(%x,%x,%x)\n",
 			  (int)pixelInfo->bytesPerRow,(int)pixelInfo->bytesPerPlane,(int)pixelInfo->bitsPerPixel,(int)pixelInfo->pixelType,(int)pixelInfo->componentCount, (int)pixelInfo->bitsPerComponent,pixelInfo->pixelFormat,
 			  (int)pixelInfo->activeWidth,(int)pixelInfo->activeHeight,(unsigned int)pixelInfo->componentMasks[0],(unsigned int)pixelInfo->componentMasks[1],(unsigned int)pixelInfo->componentMasks[2]);
 	}
@@ -502,10 +505,10 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getPixelInformation(IODispla
 //would be better to only show the mode currently configured.
 IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setDisplayMode(IODisplayModeID displayMode, IOIndex depth)
 {
-	IOLog("setDisplayMode(%x,%d)\n",(unsigned int)displayMode,(int)depth);
+	IOLog("EWProxyFrameBuffer: setDisplayMode(%x,%d)\n",(unsigned int)displayMode,(int)depth);
 	if(displayMode<1 || displayMode>fProvider->getModeCount() || depth!=0) 
 	{
-		IOLog("unsupported mode!\n");
+		IOLog("EWProxyFrameBuffer: unsupported mode!\n");
 		return kIOReturnUnsupportedMode;
 	}
 	if(mode!=displayMode)
@@ -546,10 +549,10 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setCursorImage(void *img)
 	//and tell OS (parent class, essentially) to convert it.
 	//img is our own buffer. We don't even need to copy it into our buffer afterwards.
 	bool ret=convertCursorImage(img, &cdesc, &cinfo);
-	IOLog("convertCursorImage()=%s\n",(ret?"true":"false"));
+	IOLog("EWProxyFrameBuffer: convertCursorImage()=%s\n",(ret?"true":"false"));
 	if(ret)
 	{
-		IOLog("cursor size: %d x %d\n",(int)cinfo.cursorWidth,(int)cinfo.cursorHeight);
+		IOLog("EWProxyFrameBuffer: cursor size: %d x %d\n",(int)cinfo.cursorWidth,(int)cinfo.cursorHeight);
 		cursorWidth=cinfo.cursorWidth;
 		cursorHeight=cinfo.cursorHeight;
 		//our user space app can register a few events
