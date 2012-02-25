@@ -37,7 +37,11 @@ protected:
 	bool owningFB;
 	bool eventEnabled;
 	mach_port_t eventPort;
+#ifdef __LP64__
+    OSAsyncReference64 eventFunction;
+#else
 	OSAsyncReference eventFunction;
+#endif
 public:
 	//virtual void stop(IOService *provider);
 	virtual bool start(IOService *provider);
@@ -91,8 +95,11 @@ protected:
 	virtual IOReturn GetCursorResolution(int *width, int *height);
 	
 	static IOReturn sEnableCursorEvents(info_ennowelbers_proxyframebuffer_client* target, void *reference, IOExternalMethodArguments *arguments);
-	
+#ifdef __LP64__
+	virtual IOReturn EnableCursorEvents(mach_vm_address_t call, io_user_reference_t reference);
+#else
 	virtual IOReturn EnableCursorEvents(void *call, void *reference);
+#endif
 	
 	static IOReturn sDisableCursorEvents(info_ennowelbers_proxyframebuffer_client* target, void *reference, IOExternalMethodArguments *arguments);
 	

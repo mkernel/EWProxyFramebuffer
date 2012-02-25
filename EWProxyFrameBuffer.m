@@ -19,8 +19,13 @@ io_service_t FindEWProxyFramebufferDriver(void)
 
 unsigned char *EWProxyFramebufferDriverMapCursor(io_connect_t connect, unsigned int *size, int *width, int *height)
 {
+#ifdef __LP64__
+	mach_vm_address_t address=0;
+	mach_vm_size_t vmsize=0;
+#else
 	vm_address_t address=0;
 	vm_size_t vmsize=0;
+#endif
 	IOConnectMapMemory(connect, 1, mach_task_self(), &address, &vmsize, kIOMapAnywhere);
 	*size=vmsize;
 	
@@ -34,14 +39,23 @@ unsigned char *EWProxyFramebufferDriverMapCursor(io_connect_t connect, unsigned 
 
 void EWProxyFramebufferDriverUnmapCursor(io_connect_t connect, unsigned char *buf)
 {
+#ifdef __LP64__
+	mach_vm_address_t address=(mach_vm_address_t)buf;
+#else
 	vm_address_t address=(vm_address_t)buf;
+#endif
 	IOConnectUnmapMemory(connect, 1, mach_task_self(), address);
 }
 
 unsigned char *EWProxyFramebufferDriverMapFramebuffer(io_connect_t connect, unsigned int *size)
 {
+#ifdef __LP64__
+	mach_vm_address_t address=0;
+	mach_vm_size_t vmsize=0;
+#else
 	vm_address_t address=0;
 	vm_size_t vmsize=0;
+#endif
 	IOConnectMapMemory(connect, 0, mach_task_self(), &address, &vmsize, kIOMapAnywhere);
 	*size=vmsize;
 	return (unsigned char*)address;
@@ -49,7 +63,11 @@ unsigned char *EWProxyFramebufferDriverMapFramebuffer(io_connect_t connect, unsi
 
 void EWProxyFramebufferDriverUnmapFramebuffer(io_connect_t connect, unsigned char *buf)
 {
+#ifdef __LP64__
+	mach_vm_address_t address=(mach_vm_address_t)buf;
+#else
 	vm_address_t address=(vm_address_t)buf;
+#endif
 	IOConnectUnmapMemory(connect, 0, mach_task_self(), address);
 }
 
@@ -107,7 +125,11 @@ void EWProxyFramebufferDriverGetCursorState(io_connect_t connect, int *x, int *y
 bool EWProxyFramebufferDriverEnableCursorEvents(io_connect_t connect, mach_port_t recallport, void *callback, void *reference)
 {
 	IOConnectSetNotificationPort(connect, 0, recallport, 0);
-	uint64_t buf[]={(uint64_t)(unsigned int)callback, (uint64_t)(unsigned int)reference};
+#ifdef __LP64__
+	uint64_t buf[]={(uint64_t)(mach_vm_address_t)callback, (uint64_t)(io_user_reference_t)reference};
+#else
+	uint64_t buf[]={(uint64_t)(vm_address_t)callback, (uint64_t)(vm_address_t)reference};
+#endif
 	kern_return_t ret=IOConnectCallScalarMethod(connect, kEWProxyEnableCursorEvents, buf, 2, NULL, NULL);
 	if(ret!=kIOReturnSuccess)
 		return false;

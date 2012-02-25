@@ -218,7 +218,7 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getAttributeForConnection(IO
 	var.attribute=attribute;
 	var.param[4]='\0';
 	IOLog("EWProxyFrameBuffer: getAttributeForConnection(%d,%s).\n",(int)connectIndex,var.param);
-	if(attribute==kConnectionEnable)
+	if(attribute==kConnectionEnable || attribute==kConnectionCheckEnable)
 	{
 		if(value!=NULL)
 		{
@@ -226,8 +226,8 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::getAttributeForConnection(IO
 				*value=0;
 			else
 				*value=1;
-			if(started==false)
-				*value=1;
+			//if(started==false)
+			//	*value=1;
 		}
 		return kIOReturnSuccess;
 	}

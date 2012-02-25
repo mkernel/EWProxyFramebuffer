@@ -216,7 +216,11 @@ IOReturn info_ennowelbers_proxyframebuffer_client::sGetCursorResolution(info_enn
 
 IOReturn info_ennowelbers_proxyframebuffer_client::sEnableCursorEvents(info_ennowelbers_proxyframebuffer_client* target, void *reference, IOExternalMethodArguments *arguments)
 {
+#ifdef __LP64__
+	return target->EnableCursorEvents((mach_vm_address_t)(arguments->scalarInput[0]), (io_user_reference_t)(arguments->scalarInput[1]));
+#else
 	return target->EnableCursorEvents((void*)(arguments->scalarInput[0]), (void*)(arguments->scalarInput[1]));
+#endif
 }
 
 #pragma mark member functions of the call chaing
@@ -301,9 +305,14 @@ void info_ennowelbers_proxyframebuffer_client::FireCursorStateChanged()
 {
 	if(eventEnabled)
 	{
-		void *type[1]={(void*)kEWProxyCursorStateChanged};
 		//With the help of a previously registered event we're firing it.
+#ifdef __LP64__
+		io_user_reference_t type[1]={(io_user_reference_t)kEWProxyCursorStateChanged};
+        sendAsyncResult64(eventFunction, kIOReturnSuccess,type,1);
+#else
+		void *type[1]={(void*)kEWProxyCursorStateChanged};
 		sendAsyncResult(eventFunction, kIOReturnSuccess, type, 1);
+#endif
 	}
 }
 
@@ -311,8 +320,13 @@ void info_ennowelbers_proxyframebuffer_client::FireCursorImageChanged()
 {
 	if(eventEnabled)
 	{
+#ifdef __LP64__
+		io_user_reference_t type[1]={(io_user_reference_t)kEWProxyCursorImageChanged};
+		sendAsyncResult64(eventFunction,kIOReturnSuccess, type,1);
+#else
 		void *type[1]={(void*)kEWProxyCursorImageChanged};
 		sendAsyncResult(eventFunction,kIOReturnSuccess, type,1);
+#endif
 	}
 }
 
@@ -322,11 +336,19 @@ void info_ennowelbers_proxyframebuffer_client::FireCursorImageChanged()
 //Later on this opaque structure can be used to fire the event.
 //I did not yet get the way this works, however in theory you could even transport parameters.
 //we're not using them, though.
+#ifdef __LP64__
+IOReturn info_ennowelbers_proxyframebuffer_client::EnableCursorEvents(mach_vm_address_t call, io_user_reference_t reference)
+#else
 IOReturn info_ennowelbers_proxyframebuffer_client::EnableCursorEvents(void *call, void *reference)
+#endif
 {
 	if(fProvider->eventClient!=NULL)
 		return kIOReturnBusy;
+#ifdef __LP64__
+    setAsyncReference64(eventFunction,eventPort,call,reference);
+#else
 	setAsyncReference(eventFunction, eventPort, call, reference);
+#endif
 	eventEnabled=true;
 	fProvider->eventClient=this;
 	return kIOReturnSuccess;
