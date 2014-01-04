@@ -152,8 +152,8 @@ IOReturn info_ennowelbers_proxyframebuffer_fbuffer::setAttribute( IOSelect attri
 	}
 	if(attribute==kIOPowerAttribute)
 	{
-		handleEvent((value>=1 ? kIOFBNotifyWillPowerOn : kIOFBNotifyWillPowerOff), NULL);
-		handleEvent((value>=1 ? kIOFBNotifyDidPowerOn : kIOFBNotifyDidPowerOff), NULL);
+		handleEvent((value>=1 ? kIOFBNotifyWillPowerOn : kIOFBNotifyWillPowerOff), (void*)TRUE);
+		handleEvent((value>=1 ? kIOFBNotifyDidPowerOn : kIOFBNotifyDidPowerOff), (void*)TRUE);
 		ret=kIOReturnSuccess;
 	}
 	IOLog("EWProxyFrameBuffer: setAttribute(%s,%x)=%x\n",var.param,(unsigned int)value,ret);
